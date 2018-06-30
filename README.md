@@ -20,20 +20,20 @@ The endpoint supports metadata as well in the url ```/FederationMetadata/2007-06
 
 Options
 
-| Name                | Description                                      | Default                                      |
-| --------------------|:-------------------------------------------------| ---------------------------------------------|
-| cert                | public key used by this identity provider        | REQUIRED                                     |
-| key                 | private key used by this identity provider       | REQUIRED                                     |
-| getPostURL          | get the url to post the token f(audience, samlRequestDom, req, callback)                | REQUIRED                                     |
-| issuer              | the name of the issuer of the token              | REQUIRED                                     |
-| audience            | the audience for the saml token                  | req.query.SAMLRequest.Issuer                 |
-| getUserFromRequest  | how to extract the user information from request | function(req) { return req.user; }           |
-| profileMapper       | mapper to map users to claims (see PassportProfileMapper)| PassportProfileMapper |
-| signatureAlgorithm  | signature algorithm, options: rsa-sha1, rsa-sha256 | ```'rsa-sha256'``` |
-| digestAlgorithm     | digest algorithm, options: sha1, sha256          | ```'sha256'``` |
-| RelayState          | state of the auth process                        | ```req.query.RelayState || req.body.RelayState``` |
-| sessionIndex          | the index of a particular session between the principal identified by the subject and the authenticating authority                        | _SessionIndex is not included_ |
-| responseHandler       | custom response handler for SAML response f(SAMLResponse, options, req, res, next) | HTML response that POSTS to postUrl |
+| Name                        | Description                                      | Default                                      |
+| ----------------------------|:-------------------------------------------------| ---------------------------------------------|
+| cert                        | public key used by this identity provider        | REQUIRED                                     |
+| key                         | private key used by this identity provider       | REQUIRED                                     |
+| getPostURL                  | get the url to post the token f(audience, samlRequestDom, req, callback)                | REQUIRED                                     |
+| issuer                      | the name of the issuer of the token              | REQUIRED                                     |
+| audience                    | the audience for the saml token                  | req.query.SAMLRequest.Issuer                 |
+| getUserFromRequest          | how to extract the user information from request | function(req) { return req.user; }           |
+| profileMapper               | mapper to map users to claims (see PassportProfileMapper)| PassportProfileMapper |
+| signatureAlgorithm          | signature algorithm, options: rsa-sha1, rsa-sha256 | ```'rsa-sha256'``` |
+| digestAlgorithm             | digest algorithm, options: sha1, sha256          | ```'sha256'``` |
+| RelayState                  | state of the auth process                        | ```req.query.RelayState || req.body.RelayState``` |
+| getSessionIndexFromRequest  | the index of a particular session between the principal identified by the subject and the authenticating authority  | function(req){ return req.session && req.session.id; } |
+| responseHandler             | custom response handler for SAML response f(SAMLResponse, options, req, res, next) | HTML response that POSTS to postUrl |
 
 
 Add the middleware as follows:
